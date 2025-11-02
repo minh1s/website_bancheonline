@@ -1,0 +1,70 @@
+/* Modal background và nội dung */
+#loginModal .modal-content {
+  background-color: #5C4033; /* nâu ấm gỗ */
+  border-radius: 15px;
+  padding: 30px;
+  color: #FFF8F0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Tiêu đề modal */
+#loginModal .modal-title {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #FFDAB9; /* tone sáng ấm */
+}
+
+/* Nút đóng màu trắng */
+#loginModal .btn-close {
+  filter: invert(1);
+}
+
+/* Label input */
+#loginModal .form-label {
+  color: #FFEBCD; /* beige nhạt */
+  font-weight: 500;
+}
+
+/* Input field */
+#loginModal .form-control {
+  border-radius: 8px;
+  border: 1px solid #D2B48C;
+  background-color: #FFF5E1;
+  color: #5C4033;
+  padding: 10px 12px;
+}
+
+#loginModal .form-control:focus {
+  border-color: #FFA07A; /* tone ấm khi focus */
+  box-shadow: 0 0 5px rgba(255,160,122,0.5);
+}
+
+/* Checkbox */
+#loginModal .form-check-label {
+  color: #FFEBCD;
+}
+
+/* Button login */
+#loginModal .btn-login {
+  background-color: #D2691E; /* nâu ấm nổi bật */
+  border: none;
+  font-weight: 600;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+#loginModal .btn-login:hover {
+  background-color: #FF7F50; /* tone cam ấm */
+  color: #FFF;
+}
+
+/* Links quên mật khẩu / đăng ký */
+#loginModal a {
+  color: #FFDAB9;
+  text-decoration: none;
+}
+
+#loginModal a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,71 @@
+/* Modal nhỏ gọn, nền gỗ ấm */
+#loginModal .modal-content {
+  background-color: #5C4033;
+  border-radius: 12px;
+  padding: 25px;
+  color: #FFF8F0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 350px; /* nhỏ gọn */
+}
+
+/* Tiêu đề modal */
+#loginModal .modal-title {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #FFDAB9;
+}
+
+/* Nút đóng trắng */
+#loginModal .btn-close {
+  filter: invert(1);
+}
+
+/* Input hiện đại */
+.form-modern {
+  border-radius: 10px;
+  border: 1px solid #D2B48C;
+  background-color: #FFF5E1;
+  color: #5C4033;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+}
+
+.form-modern:focus {
+  border-color: #FFA07A;
+  box-shadow: 0 0 5px rgba(255,160,122,0.5);
+}
+
+/* Checkbox center */
+#loginModal .form-check {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Nút login hiện đại */
+#loginModal .btn-login {
+  background-color: #D2691E;
+  border: none;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#loginModal .btn-login:hover {
+  background-color: #FF7F50;
+  color: #FFF;
+}
+
+/* Links quên mật khẩu/đăng ký */
+#loginModal a {
+  color: #FFDAB9;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+#loginModal a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="../assets/css/login.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('../assets/images/bg-registration-form-2.jpg');">
+			<div class="inner">
+				<form action="">
+					<h3>Đăng Nhập</h3>
+					
+					<div class="form-wrapper">
+						<label for="">Email</label>
+						<input type="text" class="form-control">
+					</div>
+					<div class="form-wrapper">
+						<label for="">Password</label>
+						<input type="password" class="form-control">
+					</div>
+				
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> Ghi nhớ đăng nhập
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					<button>Đăng Nhập</button>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,57 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const selectAll = document.getElementById('selectAll');
+  const checkboxes = document.querySelectorAll('.product-checkbox');
+  const addSelectedBtn = document.getElementById('addSelectedToCart');
+
+  // Nếu không có sản phẩm hoặc nút thì không chạy code để tránh lỗi
+  if (!selectAll && !addSelectedBtn && checkboxes.length === 0) return;
+
+  // Hiệu ứng chọn sản phẩm
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', function () {
+      const card = this.closest('.product-card');
+      if (card) {
+        card.classList.toggle('selected', this.checked);
+      }
+    });
+  });
+
+  // Chọn tất cả / Bỏ chọn tất cả
+  if (selectAll) {
+    selectAll.addEventListener('change', function () {
+      checkboxes.forEach(cb => {
+        cb.checked = this.checked;
+        const card = cb.closest('.product-card');
+        if (card) {
+          card.classList.toggle('selected', this.checked);
+        }
+      });
+    });
+  }
+
+  // Thêm tất cả món đã chọn vào giỏ
+  if (addSelectedBtn) {
+    addSelectedBtn.addEventListener('click', function () {
+      let hasSelected = false;
+
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          hasSelected = true;
+          const card = cb.closest('.product-card');
+          if (card) {
+            const name = card.querySelector('strong')?.innerText || '';
+            const price = card.querySelector('.price')?.innerText || '';
+            const imgSrc = card.querySelector('img')?.src || '';
+            addToCart(name, price, imgSrc);
+          }
+        }
+      });
+
+      if (hasSelected) {
+        alert('✅ Đã thêm các món đã chọn vào giỏ hàng!');
+      } else {
+        alert('⚠️ Vui lòng chọn ít nhất một sản phẩm!');
+      }
+    });
+  }
+});

@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f0e1; /* tone ấm, hợp với nền gỗ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.open-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #b67a4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.open-btn:hover {
+  background-color: #a2633f;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #b67a4f;
+  border-radius: 10px;
+  z-index: 9;
+  background-color: #fff5eb;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  padding: 20px;
+  width: 300px;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #b67a4f;
+}
+
+.form-container input[type=email],
+.form-container input[type=password],
+.form-container input[type=text] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: #b67a4f;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #a2633f;
+}
+
+.cancel {
+  background-color: #ccc;
+  margin-top: 10px;
+}
+
+.cancel:hover {
+  background-color: #b3b3b3;
+}
