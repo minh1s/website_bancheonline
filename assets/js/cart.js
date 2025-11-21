@@ -7,19 +7,8 @@ function addToCart(name, price, imgSrc) {
   else cartItems.push({ name, price, img: imgSrc, quantity: 1 });
 
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  
-  // ⚡ THAY THẾ ALERT() BẰNG SWEETALERT2
-  Swal.fire({
-    title: 'Thành Công!', 
-    text: `Đã thêm "${name}" vào giỏ hàng!`,
-    icon: 'success',
-    // Bỏ qua toast: true và position: 'top-end' để nó hiện ở giữa
-    showConfirmButton: false,
-     // Tự đóng sau 2 giây
-    timerProgressBar: true,
-  });
+  alert(`✅ Đã thêm "${name}" vào giỏ hàng!`);
 }
-
 
 // ====================== DOM READY ======================
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,13 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selected = Array.from(checkboxes).filter(cb => cb.checked);
 
     if (selected.length === 0) {
-      // ⚡ THAY THẾ ALERT() BẰNG SWEETALERT2
-      Swal.fire({
-        title: 'Lỗi',
-        text: 'Vui lòng chọn ít nhất một sản phẩm!',
-        icon: 'warning',
-        confirmButtonText: 'Đã hiểu'
-      });
+      alert('⚠️ Vui lòng chọn ít nhất một sản phẩm!');
       return;
     }
 
@@ -73,12 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
       addToCart(name, price, imgSrc);
     });
 
-    // ⚡ THAY THẾ ALERT() BẰNG SWEETALERT2 (Thông báo thành công tổng)
-    Swal.fire({
-      title: 'Hoàn Tất!',
-      text: `Đã thêm ${selected.length} món đã chọn vào giỏ hàng!`,
-      icon: 'success',
-      confirmButtonText: 'Xem giỏ hàng'
-    });
+    alert('✅ Đã thêm các món đã chọn vào giỏ hàng!');
   });
 });
