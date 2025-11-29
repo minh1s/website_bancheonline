@@ -16,6 +16,42 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentTotalAmount = 0;
 
     // --- HÀM RENDER GIỎ HÀNG ---
+    function toSlug(text) {
+    return text
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // bỏ dấu tiếng Việt
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")         // khoảng trắng → -
+        .replace(/[^a-z0-9\-]/g, ""); // ký tự lạ → bỏ
+}
+
+// ---------------- DANH SÁCH FILE ẢNH ĐANG CÓ ----------------
+const validImages = [
+    "caramen-hoa-qua.png",
+    "che-thai-buoi.png",
+    "che-thai-caramen.png",
+    "che-thai-dua.png",
+    "che-thai-hoa-qua.png",
+    "che-thai-khoai-deo.png",
+    "che-thai-sau-hoa-qua.png",
+    "dua-dam-thai-sau-rieng.png",
+    "dua-dam-thai.png",
+    "sua-chua-hoa-qua.png",
+    "sua-chua-mit.png",
+    "sua-chua-nep-cam.png"
+];
+
+// ---------------- HÀM LẤY ẢNH TỪ TÊN MÓN ----------------
+function getImagePathByName(productName) {
+    const slug = toSlug(productName);
+    const fileName = slug + ".png";
+
+    if (validImages.includes(fileName)) {
+        return "assets/images/menu/" + fileName;
+    }
+
+    return "assets/images/menu/default.png"; // fallback
+}
     function renderCart() {
         updateCartItem('get_cart', 0)
         .then(data => {
@@ -46,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const itemTotal = price * item.quantity;
                 total += itemTotal;
 
-                const imgUrl = item.img ?? "assets/images/menu/.png";
+               const imgUrl = item.img ? `assets/images/menu/${item.img}`: getImagePathByName(item.name);
 
                 return `
                     <div class="cart-item" data-product-id="${item.product_id}">
