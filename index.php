@@ -129,7 +129,7 @@ session_start(); // LUÔN LUÔN là dòng đầu tiên trong file PHP nếu bạ
         crossorigin="anonymous"></script>
 
     <script src="assets/js/cart.js"></script>
-    <script src="assets/js/login.js"></script> 
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -162,61 +162,6 @@ session_start(); // LUÔN LUÔN là dòng đầu tiên trong file PHP nếu bạ
             }
         });
 
-        // --- Logic hiển thị SweetAlert2 cho Đăng nhập/Đăng ký ---
-        <?php 
-$swal_message = isset($_SESSION['swal_message']) ? $_SESSION['swal_message'] : '';
-unset($_SESSION['swal_message']); // Xóa message ngay lập tức
-?>
-<?php if ($swal_message): // Chỉ chạy script nếu có thông báo SweetAlert2 ?>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Kiểm tra cờ hiệu đăng nhập thành công
-        <?php if (isset($_SESSION['show_login_success']) && $_SESSION['show_login_success'] === true): ?>
-            Swal.fire({
-                title: 'Đăng nhập Thành Công!',
-                text: '<?php echo htmlspecialchars($swal_message); ?>',
-                icon: 'success',
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#3085d6',
-                timerProgressBar: true
-            });
-            <?php unset($_SESSION['show_login_success']); ?>
-        // Kiểm tra cờ hiệu đăng nhập thất bại
-        <?php elseif (isset($_SESSION['show_login_error']) && $_SESSION['show_login_error'] === true): ?>
-            Swal.fire({
-                title: 'Đăng nhập Thất Bại!',
-                text: '<?php echo htmlspecialchars($swal_message); ?>',
-                icon: 'error',
-                confirmButtonText: 'Thử lại',
-                confirmButtonColor: '#d33'
-            });
-            <?php unset($_SESSION['show_login_error']); ?>
-        // Kiểm tra cờ hiệu đăng ký thành công
-        <?php elseif (isset($_SESSION['show_register_success']) && $_SESSION['show_register_success'] === true): ?>
-            Swal.fire({
-                title: 'Đăng Ký Thành Công!',
-                text: '<?php echo htmlspecialchars($swal_message); ?>',
-                icon: 'success',
-                confirmButtonText: 'Đăng nhập ngay', // Đổi text để khuyến khích đăng nhập
-                confirmButtonColor: '#28a745'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'index.php?page=dangnhap'; // Chuyển hướng sang trang đăng nhập
-                }
-            });
-            <?php unset($_SESSION['show_register_success']); ?>
-        // Kiểm tra cờ hiệu đăng ký thất bại
-        <?php elseif (isset($_SESSION['show_register_error']) && $_SESSION['show_register_error'] === true): ?>
-            Swal.fire({
-                title: 'Đăng Ký Thất Bại!',
-                text: '<?php echo htmlspecialchars($swal_message); ?>',
-                icon: 'error',
-                confirmButtonText: 'Thử lại',
-                confirmButtonColor: '#d33'
-            });
-            <?php unset($_SESSION['show_register_error']); ?>
-        <?php endif; ?>
-    });
-<?php endif; ?>
     </script>
 
 </body>

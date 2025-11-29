@@ -1,6 +1,6 @@
 <?php
 session_start(); // LUÔN LUÔN gọi session_start() ở đầu file
-require 'connect.php'; // Gọi file kết nối database
+require 'connect.php'; // Gọi file kết nối database (Giả định chứa đối tượng $conn kiểu mysqli)
 
 $login_page_url = '../index.php?page=dangnhap'; // URL chuyển hướng về trang đăng nhập
 
@@ -11,11 +11,11 @@ if (isset($_POST['btn-login'])) {
     // Xóa tất cả cờ hiệu SweetAlert2 cũ trước khi xử lý
     unset($_SESSION['show_login_success']);
     unset($_SESSION['show_login_error']);
-    unset($_SESSION['show_register_success']); // Có thể từ trang đăng ký
-    unset($_SESSION['show_register_error']);   // Có thể từ trang đăng ký
-    unset($_SESSION['swal_message']); // Message chung nếu bạn muốn
+    unset($_SESSION['show_register_success']);
+    unset($_SESSION['show_register_error']);
+    unset($_SESSION['swal_message']);
 
-    // 1. Kiểm tra dữ liệu đầu vào rỗng
+    // 1. Kiểm tra dữ liệu đầu vào rỗng (GIỮ NGUYÊN)
     if (empty($username_input) || empty($password_input)) {
         $_SESSION['show_login_error'] = true;
         $_SESSION['swal_message'] = "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!";
@@ -23,8 +23,9 @@ if (isset($_POST['btn-login'])) {
         exit;
     }
 
-    // 2. Tìm user trong database
-    $sql = "SELECT USERNAME, PASSWORD, FULLNAME FROM user WHERE USERNAME = ?";
+    // 2. Tìm user trong database (ĐÃ SỬA: Thêm cột USER_ID)
+    // Cần lấy USER_ID để quản lý giỏ hàng sau này
+    $sql = "SELECT USER_ID, USERNAME, PASSWORD, FULLNAME FROM users WHERE USERNAME = ?"; // Đã sửa từ 'user' -> 'users'
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
@@ -49,9 +50,13 @@ if (isset($_POST['btn-login'])) {
     $row = $result->fetch_assoc();
     $stmt->close();
 
-    // 3. Kiểm tra mật khẩu
+    // 3. Kiểm tra mật khẩu (ĐÃ SỬA: Lưu USER_ID vào session)
     if (password_verify($password_input, $row['PASSWORD'])) {
         // --- ĐĂNG NHẬP THÀNH CÔNG ---
+        
+        // BƯỚC QUAN TRỌNG: Lưu USER_ID vào session
+        $_SESSION['user_id'] = $row['USER_ID']; 
+        
         $_SESSION['username'] = $row['USERNAME'];
         $_SESSION['fullname'] = $row['FULLNAME'];
         
@@ -62,7 +67,7 @@ if (isset($_POST['btn-login'])) {
         exit;
 
     } else {
-        // Mật khẩu không chính xác
+        // Mật khẩu không chính xác (GIỮ NGUYÊN)
         $_SESSION['show_login_error'] = true;
         $_SESSION['swal_message'] = "Mật khẩu không chính xác!";
         header("Location: " . $login_page_url);
@@ -70,7 +75,7 @@ if (isset($_POST['btn-login'])) {
     }
 
 } else {
-    // Nếu truy cập login.php mà không qua form POST
+    // Nếu truy cập login.php mà không qua form POST (GIỮ NGUYÊN)
     header("Location: " . $login_page_url);
     exit;
 }
