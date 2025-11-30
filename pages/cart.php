@@ -3,7 +3,7 @@
         <label>
             <input type="checkbox" id="selectAllCart"> Chọn tất cả
         </label>
-        <button id="removeSelected" class="btn-remove-selected">XÓA ĐÃ CHỌN</button>
+        <button  class="btn-remove-selected" id="removeSelected" >XÓA ĐÃ CHỌN</button>
     </div>
 
     <div class="cart-items" id="cartItems">

@@ -69,9 +69,10 @@ body {
 }
 
 .nav-item a:hover {
-  color: #ffdd99;
-  background-color: rgba(255, 255, 255, 0.08);
+  color: #faebcf;
+  background-color: rgba(153, 113, 67, 0.971);
   border-radius: 6px;
+  transform: scale(1.08);
 }
 
 .contact {
@@ -343,7 +344,10 @@ body {
 }
 
 .add-to-cart:hover {
-  background-color: #6d812d;
+  color: #657a26;
+  background-color: #c4cda5;
+  
+  transition: 0.5 ease;
 }
 
 
@@ -516,14 +520,16 @@ body {
 }
 
 .checkout:hover {
-  background: #e95c00;
+  background: #a54b1355;
+  transition: 0.5 ease;
+  transform: scale(1.05);
 }
 
-  
-
-
-
-
+.cart-controls :hover{
+  transition: 0.5 ease;
+  transform: scale(1.05);
+}
+ 
 .diachi1 {
   width: 300px;
   height: 300px;
@@ -717,16 +723,6 @@ ul {
   background: rgba(53, 122, 189, 0.8);
 }
 
-
-
-
-
-
-
-
-
-
-
 .footer {
   background-color: #eaf3f9;
   color: #333;
@@ -841,4 +837,72 @@ ul {
 .ig-small {
   transform: scale(0.82);
   transform-origin: center;
+}
+
+/* 1. Thiết lập VÙNG CHỨA CHÍNH (li.nav-item) */
+.user-info-item { /* Thay thế .user-info-item nếu bạn dùng .dropdown-menu-container */
+    position: relative; /* QUAN TRỌNG: Để định vị menu con */
+    list-style: none;
+   
+}
+
+/* 2. Định dạng Tên người dùng */
+.user-name-trigger {
+    display: block; 
+    padding: 10px 15px; /* Giữ padding để dễ di chuột */
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.user-name-trigger:hover{
+  color: #faebcf;
+  background-color: rgba(153, 113, 67, 0.971);
+  border-radius: 6px;
+  transform: scale(1.08);
+  transition: 0.3s ease;
+}
+
+/* 3. Thiết lập VÙNG NỘI DUNG THẢ XUỐNG */
+.logout-link-container { /* Sử dụng để chứa các mục Đăng xuất/Thống kê */
+    /* MẶC ĐỊNH: ẨN VÙNG NỘI DUNG */
+    display: none; 
+    position: absolute; 
+    top: 100%; /* Đặt ngay dưới đáy của .user-info-item */
+    left: 50%; /* Đẩy mép trái của menu đến vị trí giữa (50%) của thẻ cha */
+    transform: translateX(-50%);
+    z-index: 1000; /* Đảm bảo nó hiện trên các nội dung khác */
+    min-width: 150px; 
+    background-color: #988a80; /* Màu nền menu thả xuống */
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+/* 4. Hiển thị nội dung khi di chuột (HOVER) */
+.user-info-item:hover .logout-link-container {
+    display: block;
+    opacity: 1; /* Hiện ra */
+    max-height: 200px; /* Đặt chiều cao lớn hơn nội dung thực tế để nó trượt xuống */
+    pointer-events: auto;
+     
+}
+
+/* 5. Định dạng các liên kết con (Đăng xuất, Thống kê) */
+/* Cần áp dụng style cho các liên kết a bên trong container này */
+.logout-link-container a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    
+}
+
+.logout-link-container a:hover {
+    background-color: #cbac6a;
+    color: whitesmoke;
+    
 }

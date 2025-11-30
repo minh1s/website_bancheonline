@@ -36,23 +36,40 @@ session_start(); // LUÔN LUÔN là dòng đầu tiên trong file PHP nếu bạ
                     <img src="./assets/images/logo2.png" alt="Trang chủ" class="nav-logo">
                 </a>
             </li>
-            <li class="nav-item"><a href="index.php?page=about_us">ABOUT US</a></li>
 
             <?php if (isset($_SESSION['fullname'])): ?>
-                <li class="nav-item">
-                    <span style="color: #fff; font-weight: bold;"><?php echo htmlspecialchars($_SESSION['fullname']); ?></span>
-                </li>
-                <li class="nav-item"><a href="backend/logout.php">Đăng xuất</a></li>
-            <?php else: ?>
-                <li class="nav-item"><a href="index.php?page=dangnhap">ĐĂNG NHẬP</a></li>
-            <?php endif; ?>
+            <li class="nav-item user-info-item"> 
+        <div class="user-menu-dropdown"> 
+            <span class="user-name-trigger">
+                <?php echo htmlspecialchars($_SESSION['fullname']); ?>
+            </span>
+            
+            <div class="logout-link-container"> 
+                <a href="backend/logout.php" class="logout-link">ĐĂNG XUẤT</a>
+            </div>
+        </div>
+    </li>
+<?php else: ?>
+    <li class="nav-item"><a href="index.php?page=dangnhap">ĐĂNG NHẬP</a></li>
+<?php endif; ?>
 
-            <li class="nav-item"><a href="index.php?page=menu">MENU</a></li>
+<li class="nav-item"><a href="index.php?page=menu">MENU</a></li>
+
+<?php 
+
+$admin_users = ['admin1', 'admin2'];
+if (isset($_SESSION['username']) && in_array($_SESSION['username'], $admin_users)): 
+?>
+    <li class="nav-item"><a href="index.php?page=thongke">THỐNG KÊ</a></li> 
+<?php endif; ?>
+            
         </ul>
 
         <ul class="nav-right">
-            <li class="nav-item"><a href="index.php?page=hethongcuahang">HỆ THỐNG CỬA HÀNG</a></li>
+            
             <li class="nav-item"><a href="index.php?page=giohang">GIỎ HÀNG</a></li>
+            <li class="nav-item"><a href="index.php?page=about_us">VỀ CHÚNG TÔI</a></li>
+            <li class="nav-item"><a href="index.php?page=hethongcuahang">HỆ THỐNG CỬA HÀNG</a></li>
             <li class="nav-item"><a href="index.php?page=lienhe" class="contact"></a></li>
         </ul>
     </div>
@@ -196,7 +213,7 @@ if ($is_login_success || $is_login_error || $is_register_success || $is_register
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#3085d6',
                 timerProgressBar: true
-            });
+            }); 
         <?php elseif ($is_login_error): ?>
             Swal.fire({
                 title: 'Đăng nhập Thất Bại!',

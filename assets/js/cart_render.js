@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // ---------------- DANH SÁCH FILE ẢNH ĐANG CÓ ----------------
 const validImages = [
     "caramen-hoa-qua.png",
+    "caramen-thach-hoa-qua.png",
     "che-thai-buoi.png",
     "che-thai-caramen.png",
     "che-thai-dua.png",
@@ -38,7 +39,8 @@ const validImages = [
     "dua-dam-thai.png",
     "sua-chua-hoa-qua.png",
     "sua-chua-mit.png",
-    "sua-chua-nep-cam.png"
+    "sua-chua-nep-cam.png",
+    "sua-chua-thach-oc-que.png"
 ];
 
 // ---------------- HÀM LẤY ẢNH TỪ TÊN MÓN ----------------
@@ -226,7 +228,7 @@ Noi dung thanh toan:  ${transferNote} `;
     paymentCompleteBtn.addEventListener('click', function () {
         updateCartItem('checkout_complete', 0).then(data => {
             if (data.success) {
-                Swal.fire('Thành công!', 'Thanh toán hoàn tất. Cảm ơn bạn đã mua sản phẩm bên mình ', 'success');
+                Swal.fire('Thành công!', 'Thanh toán hoàn tất. Cảm ơn bạn đã mua sản phẩm bên mình. Chúc bạn ngon miệng !!! ', 'success');
                 renderCart();
             } else {
                  Swal.fire('Lỗi', data.message, 'error');

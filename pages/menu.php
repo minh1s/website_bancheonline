@@ -168,7 +168,7 @@
 
             <div class="col">
                 <div class="product-card" data-product-id="204">
-                    <img src="./assets/images/menu/sua-chua-hoa-qua.png" alt="3" class="img-sanpham">
+                    <img src="./assets/images/menu/sua-chua-thach-oc-que.png" alt="3" class="img-sanpham">
                     <strong>Sữa Chua Thạch Ốc Quế</strong>
                     <p>Sữa Chua</p>
                     <p class="price">25.000 ₫</p>
@@ -200,7 +200,7 @@
 
             <div class="col">
                 <div class="product-card" data-product-id="302">
-                    <img src="./assets/images/menu/sua-chua-hoa-qua.png" alt="3" class="img-sanpham">
+                    <img src="./assets/images/menu/caramen-thach-hoa-qua.png" alt="3" class="img-sanpham">
                     <strong>Caramen Thạch Hoa Quả</strong>
                     <p>Caramen</p>
                     <p class="price">32.000 ₫</p>
