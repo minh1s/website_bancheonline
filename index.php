@@ -66,9 +66,9 @@ if (isset($_SESSION['username']) && in_array($_SESSION['username'], $admin_users
         </ul>
 
         <ul class="nav-right">
-            
+            <li class="nav-item"><a href="index.php?page=hoantat">ĐƠN HÀNG</a></li>
             <li class="nav-item"><a href="index.php?page=giohang">GIỎ HÀNG</a></li>
-            <li class="nav-item"><a href="index.php?page=about_us">VỀ CHÚNG TÔI</a></li>
+            <!-- <li class="nav-item"><a href="index.php?page=about_us">VỀ CHÚNG TÔI</a></li> -->
             <li class="nav-item"><a href="index.php?page=hethongcuahang">HỆ THỐNG CỬA HÀNG</a></li>
             <li class="nav-item"><a href="index.php?page=lienhe" class="contact"></a></li>
         </ul>
@@ -81,6 +81,8 @@ if (isset($_SESSION['username']) && in_array($_SESSION['username'], $admin_users
 
         if ($page == 'home') {
             include 'pages/home.php';
+        } elseif ($page == 'donhang') {
+            include 'pages/donhang.php';
         } elseif ($page == 'about_us') {
             include 'pages/about_us.php';
         } elseif ($page == 'thongke') {
@@ -95,6 +97,9 @@ if (isset($_SESSION['username']) && in_array($_SESSION['username'], $admin_users
             include 'pages/register_form.php';
         } elseif ($page == 'giohang') {
             include 'pages/cart.php';
+        } elseif ($page == 'hoantat') { 
+            include 'pages/hoantat.php';
+        
         } else {
             include 'pages/home.php'; // Trang mặc định nếu page không hợp lệ
         }
@@ -141,7 +146,7 @@ if (isset($_SESSION['username']) && in_array($_SESSION['username'], $admin_users
             </p>
         </div>
     </footer>
-
+     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>               
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

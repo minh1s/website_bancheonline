@@ -163,41 +163,31 @@ function getImagePathByName(productName) {
         updateSelectAllState();
     }
     
-    // --- LOGIC MODAL & THANH TOÁN (HOÀN THIỆN) ---
-   function generateQRCode(amount) {
-    const qrCodeContainer = document.getElementById('qrcode');
-    if (typeof QRCode === 'undefined') {
-        qrCodeContainer.innerHTML = 'Lỗi: Thư viện QRCode.js bị thiếu.';
-        return;
-    }
 
-    const bankId = '970422'; // Ví dụ: Ngân hàng TMCP Quân đội (MB)
-    const accountNumber = '0796727753'; // Số tài khoản nhận tiền
-    const transferAmount = amount.toFixed(0); // Đảm bảo không có thập phân
-    const transferNote = 'THANHTOAN_CHE'; // Nội dung chuyển khoản (không dấu, không khoảng trắng)
-
-    // Chuỗi dữ liệu chuẩn VietQR (Cần code backend phức tạp hơn để tạo chuẩn chính xác)
-    // Để đơn giản, chúng ta sẽ tạo chuỗi định dạng nhanh được nhiều app ngân hàng nhận diện:
-   const paymentInfo =`
-ID Bank:              ${bankId}
-STK:                  ${accountNumber}
-Tong tien:              ${transferAmount}
-Noi dung thanh toan:  ${transferNote} `;
-    // Nếu bạn muốn hiển thị thông báo thân thiện hơn:
-    const friendlyText = `Chuyển khoản: ${accountNumber} - 
-                          Ngân hàng VP Bank
-                          Số tiền: ${amount.toLocaleString('vi-VN')} VND. 
-                          Nội dung: ${transferNote}`;
-
-    qrCodeContainer.innerHTML = '';
-    new QRCode(qrCodeContainer, { 
-        // QUAN TRỌNG: Sử dụng chuỗi định dạng có cấu trúc
-        text: paymentInfo, 
-        width: 180, 
-        height: 180 
-    });
-}
     
+let isAddressConfirmed = false;
+
+function redirectToOrderPage(totalAmount) {
+    // THỰC TẾ: Gọi API để tạo đơn hàng nháp và nhận ORDER_ID thực
+    const tempOrderId =  Date.now(); 
+    
+    const redirectURL = `index.php?page=donhang&order_id=${tempOrderId}&total=${totalAmount}`; 
+
+    // Thông báo trước khi chuyển trang (Tùy chọn)
+    Swal.fire({
+        title: 'Đang chuẩn bị Đơn hàng...',
+        text: 'Chuyển đến trang xác nhận địa chỉ và chọn phương thức thanh toán.',
+        icon: 'info',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true
+    });
+    
+    // Chuyển hướng sau khi thông báo hiện lên
+    setTimeout(() => {
+        window.location.href = redirectURL;
+    }, 1500);
+}
     // 1. Mở Modal khi nhấn THANH TOÁN
    checkoutBtn.addEventListener('click', function() {
     
@@ -213,44 +203,58 @@ Noi dung thanh toan:  ${transferNote} `;
         return; 
     }
 
+    if (!isAddressConfirmed) { 
+        Swal.fire({
+            title: 'Tiến hành Đặt hàng',
+            text: 'Vui lòng xác nhận vị trí giao hàng và phương thức thanh toán.',
+            icon: 'info', // Đổi icon sang info vì đây là bước tiếp theo, không phải lỗi
+            confirmButtonText: 'Bắt đầu'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Chuyển thẳng đến trang DonHang để hoàn tất địa chỉ và chọn thanh toán
+                redirectToOrderPage(currentTotalAmount);
+            }
+        });
+        return; 
+    }
+
+    
+    redirectToOrderPage(currentTotalAmount);
+
         modalTotalPriceContainer.textContent = currentTotalAmount.toLocaleString('vi-VN', { maximumFractionDigits: 0 }) + ' ₫';
         generateQRCode(currentTotalAmount); // Gọi hàm tạo QR
         qrModal.style.display = 'block';
     });
     
-    // 2. Đóng Modal
-    closeBtn.addEventListener('click', function() { qrModal.style.display = 'none'; });
-    window.addEventListener('click', function(event) {
-        if (event.target === qrModal) { qrModal.style.display = 'none'; }
-    });
+   
 
     // 3. Hoàn tất Thanh toán (Xóa giỏ hàng trên DB)
     paymentCompleteBtn.addEventListener('click', function () {
-        
-        // 1. Gọi API để CẬP NHẬT trạng thái đơn hàng (checkout_complete)
-        updateCartItem('checkout_complete', 0).then(data => {
-            if (data.success) {
-                Swal.fire(
-                    'Thành công!', 
-                    'Đơn hàng đã được xác nhận. Vui lòng thêm sản phẩm mới để tiếp tục mua sắm.', 
-                    'success'
-                );
+
+ // 1. Gọi API để CẬP NHẬT trạng thái đơn hàng (checkout_complete)
+    updateCartItem('checkout_complete', 0).then(data => {
+    if (data.success) {
+    Swal.fire(
+    'Thành công!', 
+    'Đơn hàng đã được xác nhận. Vui lòng thêm sản phẩm mới để tiếp tục mua sắm.', 
+    'success'
+    );
                 
-                // 2. Sau khi xác nhận thành công, gọi renderCart()
+ // 2. Sau khi xác nhận thành công, gọi renderCart()
                 // Backend sẽ tạo giỏ mới (status='pending') và Frontend hiển thị giỏ trống.
-                renderCart(); 
+    renderCart(); 
                 
-            } else {
-                Swal.fire('Lỗi', data.message, 'error');
-            }
+    } else {
+    Swal.fire('Lỗi', data.message, 'error');
+     }
             
             // 3. Đóng modal sau khi xử lý xong (dù thành công hay thất bại)
             qrModal.style.display = 'none'; 
- });
+    });
             });
 
 
-    // KHỞI CHẠY CHÍNH
-    renderCart();
-    window.renderCart = renderCart;
+ // KHỞI CHẠY CHÍNH
+ renderCart();
+ window.renderCart = renderCart;
 });

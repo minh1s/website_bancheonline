@@ -119,12 +119,10 @@
     </div>
     <script>
       let myChart = null;
-      // Đổi thành tên file PHP backend của bạn nếu khác
       const apiEndpoint = '../backend/api.php'; 
       const currentYear = new Date().getFullYear();
       // Hàm định dạng số thành VNĐ (có dấu phẩy)
       const formatCurrency = (number) => {
-        // Làm tròn số và định dạng
         return new Intl.NumberFormat('vi-VN').format(Math.round(number));
       };
       

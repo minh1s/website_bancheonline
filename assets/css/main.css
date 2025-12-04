@@ -22,7 +22,7 @@ body {
   left: 0;
   width: 100%;
   background-color: #6b4226;
-  /* màu nâu cafe */
+  font-size: 22px;
   z-index: 9999;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   display: flex;
@@ -59,7 +59,7 @@ body {
 /* --- Các liên kết --- */
 .nav-item a {
   color: #f8f4f0;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
@@ -83,10 +83,13 @@ body {
   margin-right: 50px;
   background: url("https://chelien.com.vn/images/header/contact.svg") no-repeat center;
   background-size: contain;
-  transform: scale(7.5);
-  /* 👈 phóng to gấp 1.5 lần */
+  transform: scale(5.5);
+
   transform-origin: center;
   /* phóng đều từ giữa */
+}
+.contact :hover{
+  transform: scale(6.5);
 }
 
 /* --- Responsive --- */
@@ -851,6 +854,8 @@ ul {
     display: block; 
     padding: 10px 15px; /* Giữ padding để dễ di chuột */
     color: #fff;
+    background-color: rgba(153, 113, 67, 0.971);
+    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
 }

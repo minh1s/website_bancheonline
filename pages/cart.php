@@ -27,7 +27,7 @@
 
             <div class="qr-code-area">
                 <div id="qrcode"></div>
-                <p style="font-size: 0.9em; margin-top: 10px;">Quét mã QR để chuyển tiền chính xác số trên.</p>
+                <p style="font-size: 0.9em; margin-top: 10px;;">Quét mã QR để chuyển tiền chính xác số trên.</p>
             </div>
 
             <button id="paymentCompleteBtn" class="btn-complete-payment">ĐÃ HOÀN THÀNH CHUYỂN TIỀN</button>
