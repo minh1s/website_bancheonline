@@ -1,7 +1,6 @@
     <h1 class="text-center my-4 p-3" style="width: fit-content; margin: auto;">Menu của quán chúng mình!</h1>
     <!-----------------------------MENU QUÁN-------------------------------------->
     <div id="menu" class="container text-center">
-<div id="menu-container-1" class="container text-center">
         <div class="row mt-4">
             <div class="col">
                 <div class="product-card" data-product-id="101">
@@ -214,7 +213,7 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col"></div> 
+
+            <div class="col"></div>
         </div>
     </div>
